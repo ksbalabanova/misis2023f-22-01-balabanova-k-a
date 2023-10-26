@@ -1,4 +1,6 @@
-# misis2023f-22-01-balabanova-k-
+# misis2023f-22-01-balabanova-k-a
+
+Ссылка на репозиторий: https://github.com/ksbalabanova/colcube
 
 Написание пользовательского интерфейса приложения с использование библиотек OpenGL, Dear Imgui, Glfw
 
