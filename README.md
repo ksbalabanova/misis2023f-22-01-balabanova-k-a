@@ -1,8 +1,12 @@
 # misis2023f-22-01-balabanova-k-a
 
-Ссылка на репозиторий: https://github.com/ksbalabanova/colcube
+Название задачи: Color Cube
 
-Написание пользовательского интерфейса приложения с использование библиотек OpenGL, Dear Imgui, Glfw
+Ссылка на репозиторий проекта: https://github.com/ksbalabanova/colcube
+
+Краткое описание задачи: Написание пользовательского интерфейса приложения Color Cube
+
+Используемые библиотеки: OpenGL, Dear Imgui, Glfw, OpenCV
 
 Минимальные возможности приложения:![2023-10-30 16 48 07](https://github.com/ksbalabanova/misis2023f-22-01-balabanova-k-a/assets/114703175/5618aafb-bcfc-49d7-9935-282e2b2e9dd6)(Внешний вид может быть изменен, описывается сам функционал)
 
