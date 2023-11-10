@@ -5,32 +5,23 @@
 #include<opencv2/opencv.hpp>
 #include<string>
 
-// Переменные для хранения значений ползунков и выбранного кружка
-float sliderValue1 = 0.0f;
-float sliderValue2 = 0.0f;
-float sliderValue3 = 0.0f;
+float sliderOx = 0.0f;
+float sliderOy = 0.0f;
+float sliderOz = 0.0f;
 int selectedCircle = 0;
 
 
 void renderMainMenu()
 {
-    // Начало окна Imgui
+
     ImGui::Begin("Main menu");
 
-    // Вкладка 1
-    if (ImGui::TreeNode("Вкладка 1"))
+    if (ImGui::TreeNode("Open image"))
     {
-        // Область с кнопками
         ImGui::Indent();
 
-        if (ImGui::Button("Кнопка 1.1"))
+        if (ImGui::Button("Choose a photo from the computer"))
         {
-            // Действие при нажатии на кнопку 1.1
-        }
-
-        if (ImGui::Button("Кнопка 1.2"))
-        {
-            // Действие при нажатии на кнопку 1.2
         }
 
         ImGui::Unindent();
@@ -39,77 +30,63 @@ void renderMainMenu()
     }
 
 
-    // Вкладка 2
-    if (ImGui::TreeNode("v2"))
+    if (ImGui::TreeNode("To get a projection"))
     {
-        // Область с кнопкой
         ImGui::Indent();
-        if (ImGui::Button("b2"))
+        if (ImGui::Button("plane_1"))
         {
-            // Действие при нажатии на кнопку
         }
+
+        if (ImGui::Button("plane_2"))
+        {
+        }
+        
         ImGui::Unindent();
 
         ImGui::TreePop();
     }
 
-    // Вкладка 3
-    if (ImGui::TreeNode("v3"))
+    if (ImGui::TreeNode("Save"))
     {
-        // Область с кнопкой
         ImGui::Indent();
-        if (ImGui::Button("b3"))
+        if (ImGui::Button("Text"))
         {
-            // Действие при нажатии на кнопку
         }
+
+        ImGui::Indent();
+        if (ImGui::Button("Protection"))
+        {
+        }
+
+        ImGui::Indent();
+        if (ImGui::Button("RGB_cube"))
+        {
+        }
+        
         ImGui::Unindent();
 
         ImGui::TreePop();
     }
 
-    // Вкладка 4
-    if (ImGui::TreeNode("w4"))
-    {
-        // Область с кнопкой
-        ImGui::Indent();
-        if (ImGui::Button("b4"))
-        {
-            // Действие при нажатии на кнопку
-        }
-        ImGui::Unindent();
+   
 
-        ImGui::TreePop();
-    }
+    ImGui::SliderFloat("Ox", &sliderOx, 0.0f, 360.0f);
+    ImGui::SliderFloat("Oy", &sliderOy, 0.0f, 360.0f);
+    ImGui::SliderFloat("Oz", &sliderOz, 0.0f, 360.0f);
 
-    // Ползунок 1
-    ImGui::SliderFloat("Ползунок 1", &sliderValue1, 0.0f, 1.0f);
-
-    // Ползунок 2
-    ImGui::SliderFloat("Ползунок 2", &sliderValue2, 0.0f, 1.0f);
-
-    // Ползунок 3
-    ImGui::SliderFloat("Ползунок 3", &sliderValue3, 0.0f, 1.0f);
-
-    // Кружок 1
-    if (ImGui::RadioButton("Кружок 1", selectedCircle == 0))
+    if (ImGui::RadioButton("RGB", selectedCircle == 0))
     {
         selectedCircle = 0;
     }
-
-    // Кружок 2
-    if (ImGui::RadioButton("Кружок 2", selectedCircle == 1))
+    if (ImGui::RadioButton("sRGB", selectedCircle == 1))
     {
         selectedCircle = 1;
     }
-
-    // Кружок 3
-    if (ImGui::RadioButton("Кружок 3", selectedCircle == 2))
+    if (ImGui::RadioButton("HSV", selectedCircle == 2))
     {
         selectedCircle = 2;
     }
-
-
-    // Конец окна Imgui
+    
     ImGui::End();
 }
 
