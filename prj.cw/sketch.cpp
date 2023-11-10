@@ -105,7 +105,6 @@ int main()
     ImGui_ImplOpenGL3_Init("#version 120");
 
 
-    // Главный цикл приложения
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
