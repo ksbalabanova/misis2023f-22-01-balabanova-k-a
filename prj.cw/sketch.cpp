@@ -2,19 +2,26 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
-#include<opencv2/opencv.hpp>
-#include<string>
+#include <opencv2/opencv.hpp>
+#include <string>
+#include<ImGuiFileDialog.h>
+
 
 float sliderOx = 0.0f;
 float sliderOy = 0.0f;
 float sliderOz = 0.0f;
 int selectedCircle = 0;
 
+std::string img;
+
+bool isOpen = false;
 
 void renderMainMenu()
 {
+    //cv::Mat image;
 
     ImGui::Begin("Main menu");
+
 
     if (ImGui::TreeNode("Open image"))
     {
@@ -22,6 +29,22 @@ void renderMainMenu()
 
         if (ImGui::Button("Choose a photo from the computer"))
         {
+            isOpen = true;
+        }
+
+
+        if (isOpen)
+        {
+            static char path[256] = "";
+            ImGui::InputText("Image path", path, sizeof(path));
+            img = path;
+            cv::Mat image = cv::imread(img);
+
+
+            if (ImGui::Button("Ok"))
+            {
+                isOpen = false;
+            }
         }
 
         ImGui::Unindent();
@@ -29,6 +52,47 @@ void renderMainMenu()
         ImGui::TreePop();
     }
 
+
+    if (ImGui::TreeNode("Rotation"))
+    {
+        ImGui::Indent();
+
+        ImGui::SliderFloat("Ox", &sliderOx, 0.0f, 360.0f);
+        ImGui::SliderFloat("Oy", &sliderOy, 0.0f, 360.0f);
+        ImGui::SliderFloat("Oz", &sliderOz, 0.0f, 360.0f);
+
+        ImGui::Unindent();
+
+        ImGui::TreePop();
+    }
+
+
+    if (ImGui::TreeNode("Color sistem"))
+    {
+        ImGui::Indent();
+
+        if (ImGui::RadioButton("RGB", selectedCircle == 0))
+        {
+            selectedCircle = 0;
+        }
+        if (ImGui::RadioButton("CMY", selectedCircle == 1))
+        {
+            selectedCircle = 1;
+        }
+
+        if (ImGui::RadioButton("HSV", selectedCircle == 2))
+        {
+            selectedCircle = 2;
+        }
+        if (ImGui::RadioButton("HSL", selectedCircle == 3))
+        {
+            selectedCircle = 3;
+        }
+
+        ImGui::Unindent();
+
+        ImGui::TreePop();
+    }
 
     if (ImGui::TreeNode("To get a projection"))
     {
@@ -40,7 +104,11 @@ void renderMainMenu()
         if (ImGui::Button("plane_2"))
         {
         }
-        
+
+        if (ImGui::Button("plane_3"))
+        {
+        }
+
         ImGui::Unindent();
 
         ImGui::TreePop();
@@ -62,31 +130,14 @@ void renderMainMenu()
         if (ImGui::Button("RGB_cube"))
         {
         }
-        
+
         ImGui::Unindent();
 
         ImGui::TreePop();
     }
 
-   
 
-    ImGui::SliderFloat("Ox", &sliderOx, 0.0f, 360.0f);
-    ImGui::SliderFloat("Oy", &sliderOy, 0.0f, 360.0f);
-    ImGui::SliderFloat("Oz", &sliderOz, 0.0f, 360.0f);
 
-    if (ImGui::RadioButton("RGB", selectedCircle == 0))
-    {
-        selectedCircle = 0;
-    }
-    if (ImGui::RadioButton("sRGB", selectedCircle == 1))
-    {
-        selectedCircle = 1;
-    }
-    if (ImGui::RadioButton("HSV", selectedCircle == 2))
-    {
-        selectedCircle = 2;
-    }
-    
     ImGui::End();
 }
 
