@@ -25,7 +25,7 @@
 
 Кнопки 6️⃣ Позволяют масштабировать RGB куб.
 
-Примерный вид главного меню в развернутом виде:![IMG_0636](https://github.com/ksbalabanova/misis2023f-22-01-balabanova-k-a/assets/114703175/35fc1fd1-047c-4811-a200-831c0da9726e)
+Примерный вид главного меню в развернутом виде:![IMG_2DA6BF4FCC4D-1](https://github.com/ksbalabanova/misis2023f-22-01-balabanova-k-a/assets/114703175/5e4a72e7-80d8-4e43-bde5-8df09f8bb3ec)
 
 Задачи:
 1) Оформить графически
