@@ -35,5 +35,6 @@
 
 Выаолнено:
 1) Подключены все библиотеки
-2) Написан каркас главного меню:<img width="595" alt="Снимок экрана 2023-11-11 в 16 03 11" src="https://github.com/ksbalabanova/misis2023f-22-01-balabanova-k-a/assets/114703175/235cdf72-32e9-48d3-85ec-faa4565ac0cd">
+2) Написан каркас главного меню:
+<img width="595" alt="Снимок экрана 2023-11-11 в 16 03 11" src="https://github.com/ksbalabanova/misis2023f-22-01-balabanova-k-a/assets/114703175/235cdf72-32e9-48d3-85ec-faa4565ac0cd">
 <img width="532" alt="Снимок экрана 2023-11-11 в 16 03 25" src="https://github.com/ksbalabanova/misis2023f-22-01-balabanova-k-a/assets/114703175/05c11348-9726-419e-bfee-26b684b7ee5f">
