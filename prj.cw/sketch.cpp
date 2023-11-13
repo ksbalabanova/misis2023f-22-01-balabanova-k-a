@@ -38,7 +38,7 @@ void renderMainMenu()
             static char path[256] = "";
             ImGui::InputText("Image path", path, sizeof(path));
             img = path;
-            cv::Mat image = cv::imread(img);
+            //cv::Mat image = cv::imread(img);
 
 
             if (ImGui::Button("Ok"))
