@@ -4,12 +4,10 @@
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <string>
-#include "ImGuiFileDialog.h" // Подключение заголовочного файла библиотеки ImGui FileDialog
+#include "ImGuiFileDialog.h" 
 
-// Объявление глобальной переменной для хранения текста, который будет записан в файл
 std::string fileText;
 
-// Функция обратного вызова для обработки нажатия кнопки
 void SaveFileButtonCallback()
 {
     // Открытие диалогового окна для сохранения файла
