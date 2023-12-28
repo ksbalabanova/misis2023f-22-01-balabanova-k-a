@@ -82,5 +82,9 @@ Git - ветвления, функционал
 
 ![Результат сложного слияния](4_report.png)
 
+Источники: 
+
+[Git -> documentation -> book] (https://git-scm.com)
+
 
 
