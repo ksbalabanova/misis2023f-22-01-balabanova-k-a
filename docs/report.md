@@ -84,7 +84,7 @@ Git - ветвления, функционал
 
 Источники: 
 
-[Git -> documentation -> book] (https://git-scm.com)
+[Git -> documentation -> book] (https://git-scm.com
 
 
 
