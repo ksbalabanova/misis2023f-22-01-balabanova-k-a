@@ -4,19 +4,66 @@
 #include <GLFW/glfw3.h>
 #include <opencv2/opencv.hpp>
 #include <string>
+//#include <json/json.h>
 #include <fstream>
-#include <ImGuiFileDialog.h>
-
 
 float sliderOx = 0.0f;
 float sliderOy = 0.0f;
 float sliderOz = 0.0f;
 int selectedCircle = 0;
+int counter = 0;
 
-std::string img;
+/*
+void writeDataToJson(float sliderOx, float sliderOy, float sliderOz, int counter) {
+    Json::Value data;
+    data["sliderOx"] = sliderOx;
+    data["sliderOy"] = sliderOy;
+    data["sliderOz"] = sliderOz;
+    data["counter"] = counter;
+
+    std::ofstream file("data.json");
+    if (file.is_open()) {
+        file << data;
+        file.close();
+        std::cout << "Data has been written to data.json" << std::endl;
+    } else {
+        std::cerr << "Unable to open file data.json for writing" << std::endl;
+    }
+}
+
+void readDataFromJson(float& sliderOx, float& sliderOy, float& sliderOz, int& counter) {
+    std::ifstream file("data.json");
+    if (file.is_open()) {
+        Json::Value data;
+        file >> data;
+        file.close();
+
+        if (!data["sliderOx"].isNull()) {
+            sliderOx = data["sliderOx"].asFloat();
+        }
+        if (!data["sliderOy"].isNull()) {
+            sliderOy = data["sliderOy"].asFloat();
+        }
+        if (!data["sliderOz"].isNull()) {
+            sliderOz = data["sliderOz"].asFloat();
+        }
+        if (!data["counter"].isNull()) {
+            counter = data["counter"].asInt();
+        }
+
+        std::cout << "Data has been read from data.json" << std::endl;
+    } else {
+        std::cerr << "Unable to open file data.json for reading" << std::endl;
+    }
+}
+*/
+
+std::string img_path;
+std::string filetext;
 cv::Mat image;
 
 bool isOpen1 = false;
+bool isOpen2 = false;
 
 void renderMainMenu()
 {
@@ -28,31 +75,33 @@ void renderMainMenu()
     {
 
         ImGui::Indent();
-        if (ImGui::Button("Choose a photo from the computer"))
+        if (ImGui::Button("Choose a photo..."))
         {
             isOpen1 = true;
         }
         if (isOpen1)
         {
-            static char path[256] = "";
-            ImGui::InputText("Image path", path, sizeof(path));
-            img = path;
+            static char path1[256] = "";
+            ImGui::InputText("Image path", path1, sizeof(path1));
+            img_path = path1;
 
             if (ImGui::Button("Ok"))
             {
-                isOpen1 = false;
-                cv::Mat image = cv::imread(img);
-                cv::namedWindow("Display window", cv::WINDOW_AUTOSIZE);
-                cv::imshow("Display window", image);
+                //isOpen1 = false;
+                cv::Mat img = cv::imread(img_path);
+                cv::namedWindow("Your Image", cv::WINDOW_AUTOSIZE);
+                cv::imshow("Your Image", img);
+                path1[0] = '\0';
             }
             if (ImGui::GetIO().WantCaptureKeyboard)
             {
-                if (ImGui::IsKeyPressed(ImGuiKey_O) && ImGui::GetIO().KeyCtrl) //клавиши "Ctrl+O"
+                if (ImGui::IsKeyPressed(ImGuiKey_O) && ImGui::GetIO().KeyCtrl)
                 {
-                    isOpen1 = false;
-                    cv::Mat image = cv::imread(img);
+                    //isOpen1 = false;
+                    cv::Mat img = cv::imread(img_path);
                     cv::namedWindow("Your Image", cv::WINDOW_AUTOSIZE);
-                    cv::imshow("Your Image", image);
+                    cv::imshow("Your Image", img);
+                    path1[0] = '\0';
                 }
             }
             ImGui::SameLine();
@@ -111,6 +160,8 @@ void renderMainMenu()
         {
         }
 
+        ImGui::SameLine();
+
         if (ImGui::Button("plane_2"))
         {
         }
@@ -124,14 +175,72 @@ void renderMainMenu()
         ImGui::TreePop();
     }
 
+    if (ImGui::TreeNode("Scale"))
+    {
+        if (ImGui::Button("+"))
+        {
+            counter++;
+        }
+        if (ImGui::GetIO().WantCaptureKeyboard)
+        {
+            if (ImGui::IsKeyPressed(ImGuiKey_1) && ImGui::GetIO().KeyCtrl)
+            {
+                counter++;
+            }
+        }
+        ImGui::SameLine();
+
+        ImGui::Text("Ctrl+1"); //Отображение горячей клавиши
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("-"))
+        {
+            counter--;
+        }
+        if (ImGui::GetIO().WantCaptureKeyboard)
+        {
+            if (ImGui::IsKeyPressed(ImGuiKey_2) && ImGui::GetIO().KeyCtrl)
+            {
+                counter--;
+            }
+        }
+        ImGui::SameLine();
+        ImGui::Text("Ctrl+2"); //Отображение горячей клавиши
+
+        ImGui::Unindent();
+
+        ImGui::TreePop();
+    }
+
     if (ImGui::TreeNode("Save"))
     {
         ImGui::Indent();
         if (ImGui::Button("Text"))
         {
-
+            isOpen2 = true;
         }
+        if(isOpen2){
+            static char path2[256] = "";
+            ImGui::InputText("name.txt", path2, sizeof(path2));
 
+            filetext = path2;
+
+            if (ImGui::Button("Ok"))
+            {
+                std::ofstream outputfile(filetext);
+                if (outputfile.is_open())
+                {
+                    outputfile << "Ox: " << std::endl;
+                    outputfile << "Oy: " << std::endl;
+                    outputfile << "Oz: " << std::endl;
+                    outputfile << "scale" << std::endl;
+                }
+                outputfile.close();
+                path2[0] = '\0';
+            }
+            
+        }
         ImGui::Indent();
         if (ImGui::Button("Protection"))
         {
@@ -154,6 +263,8 @@ void renderMainMenu()
 
 int main()
 {
+
+
     // Инициализация GLFW
     glfwInit();
     GLFWwindow* window = glfwCreateWindow(800, 600, "colorcube", nullptr, nullptr);
@@ -167,7 +278,6 @@ int main()
     ImGui_ImplOpenGL3_Init("#version 120");
 
     //cv::Mat iamge = cv::imread("/Users/balabashka/Downloads/diagram-2.png");
-
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -197,6 +307,8 @@ int main()
 
     glfwDestroyWindow(window);
     glfwTerminate();
+
+
 
     return 0;
 }
